@@ -1,0 +1,5 @@
+google-cloud-aiplatform 
+google-cloud-firestore 
+protobuf==3.20.0
+google-generativeai
+google-cloud-storage
