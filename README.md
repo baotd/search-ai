@@ -51,3 +51,11 @@ search-ai/
 ├── tsconfig.json        # TypeScript configuration
 └── vite.config.ts       # Vite build configuration
 ```
+
+# Đứng từ thư mục frontend (search-ai)
+gcloud run deploy search-ai-frontend \
+  --source . \
+  --region=<YOUR_REGION> \
+  --allow-unauthenticated \
+  --set-env-vars="VITE_API_BASE_URL=https://search-ai-api-339371990985.us-central1.run.app"
+  
