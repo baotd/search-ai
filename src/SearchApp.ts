@@ -144,8 +144,7 @@ export class SearchApp {
   }
 
   private createMessageHTML(message: Message): string {
-    const time = new Date(message.timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    
+        
     // --- Tin nhắn của Người dùng ---
     if (message.isUser) {
         const imageContent = message.imageUrl
@@ -368,36 +367,6 @@ export class SearchApp {
       }
   }
 
-  private handleInitialSearch(query: string) {
-    // Add the initial user message
-    this.addMessage(query, true);
-
-    // Switch to conversation mode
-    this.isSearchMode = false;
-    this.render();
-
-    // Simulate initial response
-    this.simulateResponse(query);
-  }
-
-  private handleImageUpload(file: File) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const imageUrl = e.target?.result as string;
-      this.addImageMessage(imageUrl, file.name);
-
-      // Switch to conversation mode if in search mode
-      if (this.isSearchMode) {
-        this.isSearchMode = false;
-        this.render();
-      }
-
-      // Simulate response about the image
-      this.simulateImageResponse(file.name);
-    };
-    reader.readAsDataURL(file);
-  }
-
   private setLoading(isLoading: boolean) {
         this.loadingSpinner.classList.toggle('hidden', !isLoading);
   }
@@ -424,7 +393,7 @@ export class SearchApp {
         }
   }
 
-  private addImageMessage(
+ /* private addImageMessage(
     imageUrl: string,
     fileName: string,
     additionalText?: string
@@ -443,7 +412,7 @@ export class SearchApp {
     if (!this.isSearchMode) {
       this.updateMessagesDisplay();
     }
-  }
+  }*/
 
   private updateMessagesDisplay() {
     const messagesContainer = document.getElementById("messagesContainer");
@@ -455,7 +424,7 @@ export class SearchApp {
     }
   }
 
-  private simulateResponse(query: string) {
+  /*private simulateResponse(query: string) {
     // Simulate a delay for AI response
     setTimeout(() => {
       let response = "";
@@ -478,14 +447,14 @@ export class SearchApp {
 
       this.addMessage(response, false);
     }, 1000);
-  }
-
-  private simulateImageResponse(fileName: string) {
+  }*/
+    
+  /*private simulateImageResponse(fileName: string) {
     // Simulate a delay for AI response to image
     setTimeout(() => {
       const response = `I can see you've uploaded "${fileName}". I can analyze this image and help you with questions about its content, objects, text, colors, or any other visual elements. What would you like to know about this image?`;
 
       this.addMessage(response, false);
     }, 1000);
-  }
+  }*/
 }

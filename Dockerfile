@@ -1,19 +1,23 @@
 # search-ai/Dockerfile
 
-# Giai đoạn 1: Build aplication
-FROM node:18-alpine as builder
+# --- Giai đoạn 1: Build (Không có thay đổi lớn) ---
+FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+# Chúng ta không cần truyền ARG vào đây nữa
 RUN npm run build
 
-# Giai đoạn 2: Serve bằng Nginx
+# --- Giai đoạn 2: Serve bằng Nginx (Thay đổi lớn) ---
 FROM nginx:stable-alpine
-# Sao chép các file tĩnh đã được build từ giai đoạn 1
+RUN rm /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
-# Sao chép file cấu hình Nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf.template /etc/nginx/conf.d/default.conf.template
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# File này sẽ được dùng để chạy lúc khởi động
+COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+
+# Chạy script entrypoint khi container khởi động
+CMD ["/entrypoint.sh"]

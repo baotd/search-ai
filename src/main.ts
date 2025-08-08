@@ -1,4 +1,4 @@
-import { SearchApp } from "./SearchApp.ts";
+import { SearchApp } from "./SearchApp";
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = document.getElementById("app");

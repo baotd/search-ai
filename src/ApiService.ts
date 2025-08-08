@@ -2,7 +2,7 @@
 import type { Message } from './SearchApp';
 
 // THAY THẾ BẰNG URL CLOUD RUN CỦA BẠN
-const API_BASE_URL = "http://127.0.0.1:8080";
+const API_BASE_URL = (window as any).VITE_API_BASE_URL;
 
 /**
  * Gửi yêu cầu tìm kiếm bằng hình ảnh.

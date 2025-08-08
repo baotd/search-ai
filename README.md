@@ -59,3 +59,15 @@ gcloud run deploy search-ai-frontend \
   --allow-unauthenticated \
   --set-env-vars="VITE_API_BASE_URL=https://search-ai-api-339371990985.us-central1.run.app"
   
+# Đặt các biến
+export FRONTEND_SERVICE_NAME="search-ai-frontend"
+export REGION="us-central1" # ví dụ: us-central1
+export BACKEND_URL="https://search-ai-api-339371990985.us-central1.run.app" # ví dụ: https://search-ai-api-....run.app
+https://search-ai-api-339371990985.us-central1.run.app
+
+# Chạy lệnh deploy
+gcloud run deploy ${FRONTEND_SERVICE_NAME} \
+  --source . \
+  --region=${REGION} \
+  --allow-unauthenticated \
+  --set-build-env-vars="VITE_API_BASE_URL=${BACKEND_URL}"  
